@@ -62,16 +62,43 @@ Run with `--help` to see all options.
 An example command would be:
 ```
 submit_subjects \
-  -q arn:aws:batch:us-east-1:123456789101:job-queue/my-queue
-  -j arn:aws:batch:us-east-1:123456789101:job-definition/my-definition:1
-  -f /path/to/file_list  # file with one s3:// path per line, pointing to a nifti or dicom dir
-  -o s3://my-bucket/path/to/output
-  -L /path/to/license_file.json  # provided by CorticoMetrics
+  -q arn:aws:batch:us-east-1:123456789101:job-queue/my-queue \
+  -j arn:aws:batch:us-east-1:123456789101:job-definition/my-definition:1 \
+  -f /path/to/file_list \
+  -o s3://my-bucket/path/to/output \
+  -L /path/to/license_file.json  \
+  -l /path/to/submission.json 
 ```
+Where 
+ - `/path/to/file_list` is  file with one s3:// path per line, pointing to a dicom dir (a folder containing just a single T1w DICOM series to be processed)
+ - `/path/to/license_file.json` is a valid license provided by CorticoMetrics
+ - `/path/to/submission.json` is a JSON log file created here, with information about submitted subjects
 
 ### `check_status`
-Still WIP. Documentation coming soon.
+This tool is still a work in progress, with more documentation coming soon! Run with `--help` to see all information
 
+To continously check the status of subjects submitted above, run this command:
+```
+check_status \
+ -l /path/to/submission.json \
+ -s /path/to/status.json \
+ --poll \
+ --continuous
+```
+Where 
+ - `/path/to/submission.json` is a JSON log file created by `ubmit_subjects`, with information about submitted subjects
+ - `/path/to/status.json` is a JSON log file created here, with status information
+
+After submitted subjects have completed processing, outputs can be downloaded locally using a `--get_*` command.
+For example, to download all output from re:THINQ (log, report.pdf, subject_info.json, and artifact.tar.gz) from subjects that both succeeded and failed in processing:
+```
+check_status \
+ --output_status both \
+ -s /path/to/status.json \
+ --save_location /path/to/results \
+ --get_all \
+ --ignore_nonexistant
+```
 
 ## AWS Batch info (random notes)
 on AWS Batch, there's a Dashboard where you can see what is running. It shows status of `SUBMITTED`, `PENDING`, `STARTING`, `RUNNING`, `SUCCESS` and `FAILURE`
