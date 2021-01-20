@@ -1,0 +1,6 @@
+# List required packages in this file, one per line.
+aiobotocore[awscli]==1.1.2
+boto3==1.14.44
+click
+pandas
+s3fs==0.5.1
