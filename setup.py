@@ -46,7 +46,7 @@ setup(
     long_description=readme,
     author="CorticoMetrics, LLC",
     author_email="ltirrell@corticometrics.com",
-    url="https://corticometrics.gitlab.com/internal_projects/batchtools",
+    url="https://github.com/corticometrics/batchtools",
     packages=find_packages(exclude=["docs", "tests"]),
     entry_points="""
         [console_scripts]
