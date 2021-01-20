@@ -4,7 +4,6 @@ Python-based Command Line Tools to interact with AWS Batch
 
 ## Setup
 ### First time install
-Soon you will be able to directly `pip install` batchtools, but for now this repo needs to be cloned and installed from there.
 It is suggested that you set up a virtual/conda environment for `batchtools`. 
 Tools to interact with AWS require specific versions, which may conflict with other software on your system if not used in an isolated environment.
 #### Optional (but recommended): environment setup
@@ -16,7 +15,12 @@ conda create -n batch python=3.6 pip
 conda activate batch
 ```
 **OR** use a python virtual environment
-#### Clone and install this repo
+#### Install using pip
+```
+pip install batchtools
+```
+
+### Development
 - clone this repo and cd into it:
 ```
 git clone git@gitlab.corticometrics.com:internal_projects/batchtools.git
@@ -26,20 +30,6 @@ cd batchtools
 ```
 pip install -e .
 ```
-
-### Updating
-- Change in to your local batch tools repo:
-```
-cd /path/to/batchtools
-```
-- Pull in the latest code, activate your conda env, and reinstall the package (to ensure any new requirements are also installed)
-```
-git pull origin master  # or replace origin with the name for your gitlab remote repo
-conda activate batch
-pip install -e .
-```
-
-### Development
 - To install additional dev requirements (as well as interactive programming tools, like `jupyterlab` and `ipython`), install the dev requirements from within the `batch` conda environment:
 ```
 # make sure you're in this repo
@@ -50,7 +40,7 @@ pip install -r requirements-dev.txt
 ```
 - Before any commit, run the tool `black` to style code in a uniform format. This also includes any `versioneer` related code (used to create the version of the tool, which is auto-generated)
 ```
- black --py36 --exclude .*version.* .
+black --target-version py36 --exclude .*version.* .
 ```
 
 ## Usage
