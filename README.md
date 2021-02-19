@@ -123,3 +123,9 @@ for i in $JOBS; do
   aws batch terminate-job --job-id $i --reason "whatever"
 done
 ```
+
+## Acknowledgments
+
+This work has been partially funded by the following NIH grants:
+- R42CA183150
+- R42AG062026
